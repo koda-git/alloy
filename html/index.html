@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MacEats</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('/images/salad.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
+
+<div class="bgimg w3-display-container w3-text-white">
+  <div class="w3-display-middle w3-jumbo">
+    <p>MacEats</p>
+  </div>
+  <div class="w3-display-topleft w3-container w3-xlarge">
+    <p><button onclick="location.href='./order';".style.display='block' class="w3-button w3-black">order</button></p>
+    <p><button onclick="document.getElementById('hours').style.display='block'" class="w3-button w3-black">hours</button></p>
+    <p><button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">contact</button></p>
+  </div>
+  <div class="w3-display-bottomleft w3-container">
+    <p class="w3-xlarge">Insert Description Here</p>
+    <p class="w3-large">1280 Main Street West, Hamilton</p>
+    <p>inspired by <a href="https://portal.deltahacks.com" target="_blank">DeltaHacks</a></p>
+  </div>
+</div>
+
+<!-- Menu Modal -->
+<div id="hours" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('hours').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Bistro</h1>
+    </div>
+    <div class="w3-container">
+      <h5><b>Lunch Service</b> <br>Monday-Friday, 11:00 am to 3:00 pm<br>Saturday & Sunday, Closed</h5>
+      <h5><b>Dinner Service</b> <br>Sunday-Thursday, 4:00 pm to 8:30 pm<br>Friday & Saturday, Closed</h5>
+    </div>
+    <div class="w3-container w3-black">
+      <h1>Bistro 2 Go</h1>
+    </div>
+    <div class="w3-container">
+      <h5>Dinner Service <b></b></h5>
+    </div>
+    <div class="w3-container w3-black">
+      <h1>Centro</h1>
+    </div>
+    <div class="w3-container">
+      <h5>urmum</h5>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="contact" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black">
+      <span onclick="document.getElementById('contact').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>Contact</h1>
+    </div>
+    <div class="w3-container">
+      <p>Send us a message!:</p>
+      <form action="/action_page.php" target="_blank">
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="MacID" required name="MacID"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Residence" required name="Residence"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Feedback" required name="Message"></p>
+        <p><button class="w3-button" type="submit">SEND MESSAGE</button></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
