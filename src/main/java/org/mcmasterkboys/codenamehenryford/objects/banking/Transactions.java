@@ -1,6 +1,7 @@
 package org.mcmasterkboys.codenamehenryford.objects.banking;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.hy.libhycore.CoreSHA;
 import me.hy.libhyextended.objects.DatabaseObject;
 import org.mcmasterkboys.codenamehenryford.modules.SQLConnectionFactory;
@@ -11,12 +12,14 @@ import java.util.Date;
 import java.util.TimeZone;
 
 @Getter
+@Setter
 public class Transactions extends DatabaseObject {
 
     private String hashRecord; // PK, Hashed: time, ownerUUID, senderUUID, receiverUUID, amount, currency
     private String ownerUUID;
-    private String senderUUID;
-    private String receiverUUID;
+    private String ownerAccount;
+    private String senderAccount;
+    private String receiverAccount;
     private float amount;
     private String currency;
     private String transactionName;
@@ -35,18 +38,21 @@ public class Transactions extends DatabaseObject {
 
     public Transactions() {
         super(SQLConnectionFactory.class);
+        transactionTime = System.currentTimeMillis();
+        generateHashRecord();
     }
 
-    public Transactions(String ownerUUID, String senderUUID, String receiverUUID, float amount, String currency, String transactionName, long transactionTime) {
+    public Transactions(String ownerUUID, String ownerAccount, String senderAccount, String receiverAccount, float amount, String currency, String transactionName, long transactionTime) {
         super(SQLConnectionFactory.class);
         this.ownerUUID = ownerUUID;
-        this.senderUUID = senderUUID;
-        this.receiverUUID = receiverUUID;
+        this.ownerAccount = ownerAccount;
+        this.senderAccount = senderAccount;
+        this.receiverAccount = receiverAccount;
         this.amount = amount;
         this.currency = currency;
         this.transactionTime = transactionTime;
         this.transactionName = transactionName;
-        this.hashRecord = CoreSHA.hash256(transactionTime + ownerUUID + senderUUID + receiverUUID + amount + currency);
+        generateHashRecord();
 
         Date date = new Date(transactionTime);
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy/HH/mm/ss");
@@ -60,5 +66,16 @@ public class Transactions extends DatabaseObject {
         this.hour = Integer.parseInt(dateArray[3]);
         this.minute = Integer.parseInt(dateArray[4]);
         this.second = Integer.parseInt(dateArray[5]);
+    }
+
+    public void generateHashRecord() {
+        this.hashRecord = CoreSHA.hash256(transactionTime + ownerUUID + senderAccount + receiverAccount + amount + currency).substring(0, 16);
+    }
+
+    public String getTimestamp() {
+        Date date = new Date(transactionTime);
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        return format.format(date);
     }
 }
