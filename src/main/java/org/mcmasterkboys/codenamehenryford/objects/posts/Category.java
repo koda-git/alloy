@@ -29,4 +29,11 @@ public class Category extends DatabaseObject {
         this.description = description;
         this.iconPath = iconPath;
     }
+
+    public Category(String categoryUUID) throws Exception {
+        super(SQLConnectionFactory.class);
+        this.uuid = categoryUUID;
+        super.setPkValue(categoryUUID);
+        this.select();
+    }
 }
