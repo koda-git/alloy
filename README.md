@@ -1,6 +1,8 @@
 # Alloy
 ## Linked Banking & Social web application
 
+Dedicated to Hackathon: DeltaHacks IX - Jan 15, 2023 @ McMaster for 36 Hours
+
 ### Simple documentation
 - Database: MariaDB
 - Schema name: henryford
