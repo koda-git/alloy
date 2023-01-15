@@ -38,6 +38,41 @@
             -moz-osx-font-smoothing: grayscale;
         }
     </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+          var datstruct = [
+            ['Month', 'Last_Month', 'This_Month']
+          ];
+
+          var lastMon = 0;
+          var thisMon = 0;
+
+          for(var i = 0; i < 31; i++) {
+            lastMon += Math.floor(Math.random() * 300);
+            thisMon += Math.floor(Math.random() * 300);
+            var e = [(i+1) + '', lastMon, thisMon];
+            datstruct.push(e);
+          }
+
+          var data = google.visualization.arrayToDataTable(datstruct);
+
+
+          var options = {
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+          chart.draw(data, options);
+        }
+      </script>
+
 </head>
 
 <body>
@@ -66,16 +101,10 @@
             <svg width="996" height="193" viewBox="0 0 996 193" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-grow-0 flex-shrink-0 w-[992px] h-[193px] relative" preserveAspectRatio="none">
             </svg>
         </div>
-        <div class="flex flex-col justify-start items-start w-[1300px] h-[421px] absolute left-[930px] top-[25px] gap-[30px] px-10 pt-10 pb-[98px] rounded-[30px] bg-neutral-50" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">
+        <div class="flex flex-col justify-start items-start w-[1440px] h-[421px] absolute left-[800px] top-[25px] gap-[30px] px-10 pt-10 pb-[98px] rounded-[30px] bg-neutral-50" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">
             <div class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative">
                 <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-[#4d5e80]"> Transactions </p>
                 <div class="flex justify-start items-center flex-grow-0 flex-shrink-0" style="filter: drop-shadow(0px 2px 5px rgba(38,51,77,0.03));">
-                    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 h-10 relative gap-2.5 pl-5 pr-[15px] py-[15px] rounded-tl-[30px] rounded-bl-[30px] bg-black border-2 border-[#f5f6f7]">
-                        <p class="flex-grow-0 flex-shrink-0 text-xs font-black text-center text-[#6b7a99]"> Next Month </p>
-                    </div>
-                    <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 h-10 relative gap-2.5 pl-[15px] pr-5 py-[15px] rounded-tr-[30px] rounded-br-[30px] bg-black border-2 border-[#f5f6f7]">
-                        <p class="flex-grow-0 flex-shrink-0 text-xs font-black text-center text-[#6b7a99]"> Last Month</p>
-                    </div>
                 </div>
             </div>
             <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 h-[268px] w-[343px] gap-[31px] pb-[130px]">
@@ -122,8 +151,11 @@
                     <p class="flex-grow-0 flex-shrink-0 text-lg font-bold text-left text-[#4d5e80]"> -$124 </p>
                 </div>
             </div>
+          <div style="polstion:absolute; width:1000px solid red; height:500px; margin-top:-392px; margin-left:380;">
+            <div id="curve_chart" style="border:1px solid red; width: 1000px; height: 400px;"></div>
+          </div>
         </div>
-        <div class="flex flex-col justify-start items-start w-[714px] h-[424px] absolute left-[175px] top-[25px] gap-5 p-10 rounded-[30px] bg-[#1A2233]" style="box-shadow: px 5px 10px 0px rgba(255,255,255,1);">
+        <div class="flex flex-col justify-start items-start w-[590px] h-[424px] absolute left-[175px] top-[25px] gap-5 p-10 rounded-[30px] bg-[#1A2233]" style="box-shadow: px 5px 10px 0px rgba(255,255,255,1);">
             <div class="flex justify-between items-start self-stretch flex-grow-0 flex-shrink-0 relative">
                 <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-withe">
                     <span class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-White">Account Summary</span>
