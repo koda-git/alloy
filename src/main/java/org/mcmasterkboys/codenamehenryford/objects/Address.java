@@ -13,7 +13,9 @@ public class Address extends DataObject {
     private String country;
     private String postalCode;
 
-    public Address(){}
+    public Address(){
+        this("", "", "", "", "");
+    }
     public Address(String street, String city, String province, String country, String postalCode) {
         this.street = street;
         this.city = city;
