@@ -9,6 +9,7 @@ import org.mcmasterkboys.codenamehenryford.modules.SQLConnectionFactory;
 @Setter
 public class BankAccount extends DatabaseObject {
 
+    private String uuid;
     private String ownerUUID;
     private String accountNumber;
     private String routingNumber;
