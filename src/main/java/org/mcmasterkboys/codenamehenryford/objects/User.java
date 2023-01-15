@@ -3,14 +3,16 @@ package org.mcmasterkboys.codenamehenryford.objects;
 import lombok.Getter;
 import lombok.Setter;
 import me.hy.libhycore.CoreSHA;
-import me.hy.libhyextended.mail.HEMail;
-import me.hy.libhyextended.mail.servers.HEGmail;
 import me.hy.libhyextended.objects.DatabaseObject;
 import me.hy.libhyextended.objects.exception.DataFieldMismatchException;
 import me.hy.libhyextended.objects.exception.UndefinedSQLKeyException;
+import me.hy.libhyextended.sql.SQLConnection;
 import org.mcmasterkboys.codenamehenryford.modules.SQLConnectionFactory;
+import org.mcmasterkboys.codenamehenryford.objects.banking.BankAccount;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 @Getter
@@ -71,5 +73,21 @@ public class User extends DatabaseObject {
 
     public void sendVerificationCode() {
         // TODO: Send verification code to user's email
+    }
+
+    public BankAccount[] getBankAccounts() throws SQLException, DataFieldMismatchException, UndefinedSQLKeyException {
+        ArrayList<BankAccount> bankAccounts = new ArrayList<>();
+
+        SQLConnection sqlConnection = new SQLConnectionFactory().getConnection();
+        ResultSet rs = sqlConnection.executeQuery("SELECT * FROM bank_accounts WHERE ownerUUID = ?", this.uuid);
+        while (rs.next()) {
+            BankAccount bankAccount = new BankAccount();
+            bankAccount.mapFromResultSet(rs);
+            bankAccounts.add(bankAccount);
+        }
+        rs.close();
+        sqlConnection.close();
+
+        return bankAccounts.toArray(new BankAccount[0]);
     }
 }
