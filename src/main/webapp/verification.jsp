@@ -14,11 +14,16 @@
     <title>Verification</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .center {
+        display: flex;
+        justify-content: center;
+        }
         html,
         body {
+            justify-content: center;
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex: 20;
             width: 100%;
             height: 100%;
             -webkit-font-smoothing: antialiased;
@@ -27,8 +32,8 @@
     </style>
 </head>
 <body>
-<div class="w-[1440px] h-[1024px] relative overflow-hidden bg-[#4c89f8]/60">
-    <div class="w-[782px] h-[826px] absolute left-[329px] top-[99px] overflow-hidden rounded-[20px] bg-white">
+<div class="w-[1920px] h-[1080px] object-fill relative overflow-hidden bg-[#4c89f8]/60">
+    <div class="w-[782px] h-[826px] absolute left-[550px] top-[40px] overflow-hidden rounded-[20px] bg-white">
         <div class="w-[601px] h-[443px]">
             <form action="" method="post">
                 <div class="w-[600px] h-[99px]">
