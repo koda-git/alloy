@@ -27,7 +27,7 @@ public class User extends DatabaseObject {
         super(SQLConnectionFactory.class);
     }
 
-    public User(String lastName, String firstName, String email, String password, String uuid, String phoneNumber, Gender gender, Address address) {
+    public User(String uuid, String lastName, String firstName, String email, String password, String phoneNumber, Gender gender, Address address) {
         super(SQLConnectionFactory.class);
         this.lastName = lastName;
         this.firstName = firstName;
@@ -39,7 +39,4 @@ public class User extends DatabaseObject {
         this.address = address;
     }
 
-    public void generateUUID() {
-        this.uuid = java.util.UUID.randomUUID().toString();
-    }
 }
