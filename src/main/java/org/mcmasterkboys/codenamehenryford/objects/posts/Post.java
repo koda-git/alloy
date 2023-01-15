@@ -75,14 +75,16 @@ public class Post extends DatabaseObject {
 
     public String getRating() {
         float score = (float) likes / (float) (likes + dislikes);
-        if (score > 0.75) {
-            return "Very helpful";
+        if (score > 0.85) {
+            return "Trustworthy";
+        } else if (score > 0.75) {
+            return "May be trustworthy";
         } else if (score > 0.5) {
-            return "Helpful";
-        } else if (score > 0.25) {
-            return "Not so helpful";
+            return "Neutral";
+        } else if (score > 0.4) {
+            return "May be untrustworthy";
         } else {
-            return "Poor";
+            return "Untrustworthy";
         }
     }
 }
