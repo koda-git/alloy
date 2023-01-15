@@ -23,6 +23,13 @@
             height: 100%;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -90,8 +97,8 @@
 
 
 
-<div class="w-[1440px] h-[1024px] relative overflow-hidden bg-[#4c89f8]/60">
-    <div class="w-[782px] h-[826px] absolute left-[329px] top-[99px] overflow-hidden rounded-[20px] bg-white">
+<div class="w-[1920px] h-[1080px] relative overflow-hidden bg-[#4c89f8]/60">
+    <div class="w-[782px] h-[826px] absolute left-[550px] top-[40px] overflow-hidden rounded-[20px] bg-white">
         <div class="w-[604px] h-[623px]">
             <form action="./signup.jsp" method="post">
                 <div class="w-[600px] h-[99px]">
