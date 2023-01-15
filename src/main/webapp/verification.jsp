@@ -50,13 +50,7 @@
     if (request.getParameter("code") != null) {
         try {
             String code = request.getParameter("code");
-
-            User user = (User) session.getAttribute("user");
-            if (user == null) {
-                // Not allowed to be here
-                response.sendRedirect("index.jsp");
-                return;
-            }
+            User user = (User) session.getAttribute("queue");
 
             if (user.getVerificationCode().equals(code)) {
                 // Verified

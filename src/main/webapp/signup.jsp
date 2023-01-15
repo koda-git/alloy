@@ -57,7 +57,7 @@
             u.sendVerificationCode();
 
             session.setAttribute("task", "signup");
-            session.setAttribute("user", u);
+            session.setAttribute("queue", u);
 
             response.sendRedirect("verification.jsp");
 

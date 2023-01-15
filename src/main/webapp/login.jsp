@@ -38,10 +38,9 @@
                 c.setMaxAge(60 * 60 * 24 * 7 * 2); // Keep login for 2 weeks
                 response.addCookie(c);
 
-                session.setAttribute("user", u);
+                session.setAttribute("queue", u);
                 request.getSession().setAttribute("task", "login");
 
-                // TODO: If task-login is set, then verify.jsp will read u and remove from session. If verified, then assign again.
                 response.sendRedirect("/verification.jsp");
             } else {
                 response.sendRedirect("/login.jsp?error=2");
