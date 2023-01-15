@@ -9,13 +9,14 @@ import org.mcmasterkboys.codenamehenryford.modules.SQLConnectionFactory;
 @Setter
 public class BankAccount extends DatabaseObject {
 
+    private String uuid;
     private String ownerUUID;
     private String accountNumber;
     private String routingNumber;
     private String bankName;
     private String type;
     private String name;
-    private String balance;
+    private float balance;
     private String currency;
 
     private String tableName = "bank_accounts";
@@ -25,8 +26,9 @@ public class BankAccount extends DatabaseObject {
         super(SQLConnectionFactory.class);
     }
 
-    public BankAccount(String ownerUUID, String accountNumber, String routingNumber, String bankName, String type, String name, String balance, String currency) {
+    public BankAccount(String uuid, String ownerUUID, String accountNumber, String routingNumber, String bankName, String type, String name, float balance, String currency) {
         super(SQLConnectionFactory.class);
+        this.uuid = uuid;
         this.ownerUUID = ownerUUID;
         this.accountNumber = accountNumber;
         this.routingNumber = routingNumber;

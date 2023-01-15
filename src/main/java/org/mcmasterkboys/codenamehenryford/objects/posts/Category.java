@@ -1,8 +1,12 @@
 package org.mcmasterkboys.codenamehenryford.objects.posts;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.hy.libhyextended.objects.DatabaseObject;
 import org.mcmasterkboys.codenamehenryford.modules.SQLConnectionFactory;
 
+@Getter
+@Setter
 public class Category extends DatabaseObject {
 
     private String uuid;

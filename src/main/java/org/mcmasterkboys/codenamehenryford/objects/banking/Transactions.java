@@ -12,10 +12,10 @@ public class Transactions extends DatabaseObject {
     private String ownerUUID;
     private String senderUUID;
     private String receiverUUID;
-    private String amount;
+    private float amount;
     private String currency;
     private String transactionName;
-    private String time;
+    private long transactionTime;
 
     private String tableName = "transactions";
     private String pkName = "hashRecord";
@@ -25,15 +25,15 @@ public class Transactions extends DatabaseObject {
         super(SQLConnectionFactory.class);
     }
 
-    public Transactions(String ownerUUID, String senderUUID, String receiverUUID, String amount, String currency, String transactionName, String time) {
+    public Transactions(String ownerUUID, String senderUUID, String receiverUUID, float amount, String currency, String transactionName, long transactionTime) {
         super(SQLConnectionFactory.class);
         this.ownerUUID = ownerUUID;
         this.senderUUID = senderUUID;
         this.receiverUUID = receiverUUID;
         this.amount = amount;
         this.currency = currency;
-        this.time = time;
+        this.transactionTime = transactionTime;
         this.transactionName = transactionName;
-        this.hashRecord = CoreSHA.hash256(time + ownerUUID + senderUUID + receiverUUID + amount + currency);
+        this.hashRecord = CoreSHA.hash256(transactionTime + ownerUUID + senderUUID + receiverUUID + amount + currency);
     }
 }
