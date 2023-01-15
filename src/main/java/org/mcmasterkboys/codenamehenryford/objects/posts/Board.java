@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import me.hy.libhycore.CoreDate;
 import me.hy.libhyextended.objects.DatabaseObject;
+import me.hy.libhyextended.objects.exception.DataFieldMismatchException;
 import org.mcmasterkboys.codenamehenryford.modules.SQLConnectionFactory;
+
+import java.sql.SQLException;
 
 @Getter
 @Setter
@@ -31,5 +34,12 @@ public class Board extends DatabaseObject {
         this.description = description;
         this.categoryUUID = categoryUUID;
         this.lastUpdated = CoreDate.mSecSince1970();
+    }
+
+    public Board(String boardUUID) throws SQLException, DataFieldMismatchException {
+        super(SQLConnectionFactory.class);
+        this.uuid = boardUUID;
+        super.setPkValue(boardUUID);
+        this.select();
     }
 }
