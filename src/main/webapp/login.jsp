@@ -1,5 +1,6 @@
 <%@ page import="org.mcmasterkboys.codenamehenryford.objects.User" %>
 <%@ page import="java.net.URLDecoder" %>
+<%@ page import="me.hy.libhyextended.objects.DatabaseObject" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
@@ -27,28 +28,27 @@
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User u = new User();
+        DatabaseObject.doPrintQuery = true;
         try {
             u.loadUsingEmail(email);
 
-            if (u.getPassword().equals(u.hashPassword(password))) {
+            if (u.getPassword().equals(u.hashPassword(password)) && u.isVerified()) {
                 u.setVerificationCode((int)(Math.random() * 1000000) + "");
                 u.sendVerificationCode();
-
-                Cookie c = new Cookie("identity", u.getUuid() + "/" + u.getPassword());
-                c.setMaxAge(60 * 60 * 24 * 7 * 2); // Keep login for 2 weeks
-                response.addCookie(c);
+                u.setPkValue(u.getUuid());
+                u.update();
 
                 session.setAttribute("queue", u);
                 request.getSession().setAttribute("task", "login");
 
-                response.sendRedirect("/verification.jsp");
+                response.sendRedirect("verification.jsp");
             } else {
-                response.sendRedirect("/login.jsp?error=2");
+                response.sendRedirect("login.jsp?error=2");
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            response.sendRedirect("/login.jsp?error=1");
+            response.sendRedirect("login.jsp?error=1");
         }
     }
 
@@ -57,31 +57,35 @@
 
 <%
     // Check cookie. If cookie is present, set session
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("identity")) {
+    try {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("identity")) {
 
-                String cookieValueDecoded = URLDecoder.decode(cookie.getValue(), "UTF-8");
-                String uuid = cookieValueDecoded.split("/")[0];
-                String password = cookieValueDecoded.split("/")[1];
+                    String cookieValueDecoded = URLDecoder.decode(cookie.getValue(), "UTF-8");
+                    String uuid = cookieValueDecoded.split("/")[0];
+                    String password = cookieValueDecoded.split("/")[1];
 
-                User u = new User();
-                u.setPkValue(uuid);
-                try {
-                    u.select();
-                }catch (Exception e) {
-                    e.printStackTrace();
+                    User u = new User();
+                    u.setPkValue(uuid);
+                    try {
+                        u.select();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    if (u.getPassword().equals(password)) {
+                        session.setAttribute("user", u);
+                        response.sendRedirect("index.jsp");
+                        return;
+                    }
+                    break;
                 }
-
-                if (u.getPassword().equals(password)) {
-                    session.setAttribute("user", u);
-                    response.sendRedirect("index.jsp");
-                    return;
-                }
-                break;
             }
         }
+    }catch (Exception e){
+        e.printStackTrace();
     }
     // If cookie is not present, then check if error message occurred
     // Checking error message
@@ -100,7 +104,7 @@
 <div class="w-[1440px] h-[1024px] relative overflow-hidden bg-[#4c89f8]/60">
     <div class="w-[782px] h-[826px] absolute left-[329px] top-[99px] overflow-hidden rounded-[20px] bg-white">
         <div class="w-[602px] h-[472px]">
-            <form action="Login" method="post">
+            <form action="login.jsp" method="post">
                 <div class="w-[600px] h-[98px]">
                     <p class="absolute left-[92px] top-[302px] text-xl font-medium text-left text-[#4d5959]"> Email <%=message%> </p>
                     <div class="w-[600px] h-[65px]">

@@ -56,9 +56,13 @@
                 // Verified
                 user.setVerified(true);
                 user.setPkValue(user.getUuid());
-                DatabaseObject.doPrintQuery = true;
                 user.update();
                 session.setAttribute("user", user);
+
+                Cookie c = new Cookie("identity", user.getUuid() + "/" + user.getPassword());
+                c.setMaxAge(60 * 60 * 24 * 7 * 2); // Keep login for 2 weeks
+                response.addCookie(c);
+
                 response.sendRedirect("index.jsp");
             } else {
                 // Incorrect code
