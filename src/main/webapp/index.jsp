@@ -20,7 +20,12 @@
     </style>
 </head>
 <body>
-<%@include file="include/status-bar.jsp"%>
+<%@include file="include/header.jsp"%>
+
+<%
+    if (session.getAttribute("user") == null) response.sendRedirect("login.jsp");
+%>
+
 <div class="w-[1434px] h-[1028px] relative overflow-hidden bg-white">
     <div class="flex flex-col justify-start items-center absolute left-[113px] top-[636px] gap-[43px] p-[30px] rounded-[30px] bg-[#83f]">
         <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[1167px] relative">
