@@ -138,21 +138,23 @@
     <%
       SQLConnection sql = new SQLConnectionFactory().getConnection();
       ResultSet rs = sql.executeQuery("SELECT * FROM transactions limit 20;");
+      int height=351;
       while (rs.next()) {
         Transactions t = new Transactions();
         t.mapFromResultSet(rs);
     %>
-    <div class="w-[1011px] h-[34px] absolute left-[339px] top-[351px] overflow-hidden">
+    <div class="w-[1011px] h-[34px] absolute left-[339px] top-[<%=height%>px] overflow-hidden">
       <p class="w-24 h-[27px] absolute left-0 top-[3px] text-sm font-medium text-left text-black"> <%=t.getSenderAccount()%> </p>
-      <p class="w-24 h-[27px] absolute left-[167px] top-[3px] text-sm font-medium text-left text-black"> <%=t.getTimestamp()%> </p>
+      <p class="w-31 h-[27px] absolute left-[167px] top-[3px] text-sm font-medium text-left text-black"> <%=t.getTimestamp()%> </p>
       <p class="w-24 h-[27px] absolute left-[391px] top-[3px] text-sm font-medium text-left text-black"> <%=t.getTransactionName()%> </p>
-      <p class="w-24 h-[27px] absolute left-[719px] top-[3px] text-sm font-medium text-left text-black"> <%=t.getAmount()%> </p>
+      <p class="w-24 h-[27px] absolute left-[719px] top-[3px] text-sm font-medium text-left text-black"> <%=t.getAmount()%> CAD </p>
       <svg width="1011" height="2" viewBox="0 0 1011 2" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-[-2px] top-[-2.24px]" preserveAspectRatio="none">
         <path d="M0 -0.241455H1091.74" stroke="#020202" stroke-opacity="0.6" stroke-width="3"></path>
       </svg>
     </div>
     <br>
     <%
+        height+=36;
       }
     %>
     <div class="w-[162px] h-[17px]">
