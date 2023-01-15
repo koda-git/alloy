@@ -56,7 +56,8 @@
             u.insert();
             u.sendVerificationCode();
 
-            request.getSession().setAttribute("task", "signup");
+            session.setAttribute("task", "signup");
+            session.setAttribute("user", u);
 
             response.sendRedirect("verification.jsp");
 
