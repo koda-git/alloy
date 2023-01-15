@@ -1,4 +1,5 @@
-<%--
+<%@ page import="org.mcmasterkboys.codenamehenryford.objects.User" %>
+<%@ page import="me.hy.libhyextended.objects.DatabaseObject" %><%--
   Created by IntelliJ IDEA.
   User: hoyounsong
   Date: 2023-01-15
@@ -31,15 +32,64 @@
         }
     </style>
 </head>
+
+<%
+    if (session.getAttribute("task") == null) {
+        // Not allowed to be here
+        response.sendRedirect("index.jsp");
+    }
+
+    if (request.getParameter("error") != null) {
+        %>
+        <script>
+            alert("An error occurred. Please try again.");
+        </script>
+        <%
+    }
+
+    if (request.getParameter("code") != null) {
+        try {
+            String code = request.getParameter("code");
+
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                // Not allowed to be here
+                response.sendRedirect("index.jsp");
+                return;
+            }
+
+            if (user.getVerificationCode().equals(code)) {
+                // Verified
+                user.setVerified(true);
+                user.setPkValue(user.getUuid());
+                DatabaseObject.doPrintQuery = true;
+                user.update();
+                session.setAttribute("user", user);
+                response.sendRedirect("index.jsp");
+            } else {
+                // Incorrect code
+                response.sendRedirect("verification.jsp");
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            %>
+                <script>
+                    alert("An error occurred. Please try again.");
+                </script>
+            <%
+        }
+    }
+%>
+
 <body>
 <div class="w-[1920px] h-[1080px] object-fill relative overflow-hidden bg-[#4c89f8]/60">
     <div class="w-[782px] h-[826px] absolute left-[550px] top-[40px] overflow-hidden rounded-[20px] bg-white">
         <div class="w-[601px] h-[443px]">
-            <form action="" method="post">
+            <form action="verification.jsp" method="post">
                 <div class="w-[600px] h-[99px]">
                     <p class="absolute left-[94px] top-[477px] text-xl font-medium text-left text-[#4d5959]"> Verification Code </p>
                     <div type="text" class="w-[600px] h-[65px]">
-                        <input type="text" class="w-[600px] h-[65px] absolute left-[91.5px] top-[510.5px] rounded-[15px] bg-[#eff0f2]"></input>
+                        <input type="text" name="code" class="w-[600px] h-[65px] absolute left-[91.5px] top-[510.5px] rounded-[15px] bg-[#eff0f2]"></input>
 <%--                        <p class="absolute left-[121px] top-[528px] text-xl text-left text-[#838383]"> Enter Code </p>--%>
                     </div>
                 </div>
@@ -55,7 +105,7 @@
             </form>
             <div class="w-[600px] h-[60px]">
                 <p class="w-[600px] absolute left-[91px] top-[331px] text-xl font-medium text-center text-[#4d5959]">
-                    <span class="w-[600px] text-xl font-medium text-center text-[#4d5959]">We have sent a 6 digit code to your email. </span>
+                    <span class="w-[600px] text-xl font-medium text-center text-[#4d5959]">We have sent a 6 digits code to your email. </span>
                     <br />
                     <span class="w-[600px] text-xl font-medium text-cente__r text-[#4d5959]">Please enter the code below to login</span>
                 </p>
