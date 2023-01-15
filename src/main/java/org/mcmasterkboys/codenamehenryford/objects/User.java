@@ -16,8 +16,7 @@ public class User extends DatabaseObject {
     private String uuid;
     private String phoneNumber;
     private Address address;
-
-
+    
     public User() {
         super();
         this.setPkName("uuid");
