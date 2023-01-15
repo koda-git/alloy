@@ -1,5 +1,5 @@
 <div
-        class="flex justify-between items-center w-[1435px] h-[83px] px-[25px] py-5 border-t-0 border-r-0 border-b-2 border-l-0 border-[#edeff2]"
+        class="flex justify-between items-center w-[1920px] h-[83px] px-[25px] py-5 border-t-0 border-r-0 border-b-2 border-l-0 border-[#edeff2]"
 >
     <div
             class="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[181px] relative gap-[52px]"
