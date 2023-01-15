@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Preview</title>
+    <title>Verification</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html,
@@ -35,7 +35,7 @@
                     <p class="absolute left-[94px] top-[477px] text-xl font-medium text-left text-[#4d5959]"> Verification Code </p>
                     <div type="text" class="w-[600px] h-[65px]">
                         <input type="text" class="w-[600px] h-[65px] absolute left-[91.5px] top-[510.5px] rounded-[15px] bg-[#eff0f2]"></input>
-                        <p class="absolute left-[121px] top-[528px] text-xl text-left text-[#838383]"> Enter Code </p>
+<%--                        <p class="absolute left-[121px] top-[528px] text-xl text-left text-[#838383]"> Enter Code </p>--%>
                     </div>
                 </div>
                 <div class="w-[300px] h-[111px]">
