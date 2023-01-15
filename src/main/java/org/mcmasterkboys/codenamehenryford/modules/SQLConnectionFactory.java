@@ -8,9 +8,10 @@ public class SQLConnectionFactory extends me.hy.libhyextended.sql.SQLConnectionF
     public SQLConnection getConnection() {
         SQLConnection sqlConnection = new SQLConnection();
         sqlConnection.setUseAutoClose(true);
+        sqlConnection.setAddress("192.168.64.5");
         sqlConnection.setUsername("local");
         sqlConnection.setPassword("local");
-        sqlConnection.setDatabaseName("hford");
+        sqlConnection.setDatabaseName("henryford");
         return sqlConnection;
     }
 }
