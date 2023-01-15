@@ -52,6 +52,7 @@
 
             String random6digit = (int) (Math.random() * 1000000) + "";
             User u = new User(UUID.randomUUID().toString(), lastName, firstName, email, password, "(000)000-0000", Gender.OTHER.toString(), random6digit, false, new Address());
+            u.setPassword(u.hashPassword(u.getPassword()));
             u.insert();
             u.sendVerificationCode();
 
@@ -61,10 +62,31 @@
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("signup.jsp?error=1");
+            response.sendRedirect("signup.jsp?error=2");
         }
     }
 %>
+
+<%
+    String error = request.getParameter("error");
+    if (error != null) {
+        if (error.equals("1")) {
+            %>
+            <script>
+                alert("Email already in use");
+            </script>
+
+            <%
+        }else if (error.equals("2")) {
+            %>
+            <script>
+                alert("An error occurred.");
+            </script>
+            <%
+        }
+    }
+%>
+
 
 
 <div class="w-[1440px] h-[1024px] relative overflow-hidden bg-[#4c89f8]/60">
@@ -74,28 +96,28 @@
                 <div class="w-[600px] h-[99px]">
                     <p class="absolute left-[98px] top-[151px] text-xl font-medium text-left text-[#4d5959]"> First Name </p>
                     <div class="w-[600px] h-[65px]">
-                        <input type="text" class="w-[600px] h-[65px] absolute left-[95.5px] top-[184.5px] rounded-[15px] bg-[#eff0f2]"></input>
+                        <input type="text" name="firstName" class="w-[600px] h-[65px] absolute left-[95.5px] top-[184.5px] rounded-[15px] bg-[#eff0f2]"></input>
 <%--                        <p class="absolute left-[125px] top-[202px] text-xl text-left text-[#838383]">John</p>--%>
                     </div>
                 </div>
                 <div class="w-[600px] h-[99px]">
                     <p class="absolute left-[98px] top-[274px] text-xl font-medium text-left text-[#4d5959]"> Last Name </p>
                     <div class="w-[600px] h-[65px]">
-                        <input type="text" class="w-[600px] h-[65px] absolute left-[95.5px] top-[307.5px] rounded-[15px] bg-[#eff0f2]"></input>
+                        <input type="text" name="lastName" class="w-[600px] h-[65px] absolute left-[95.5px] top-[307.5px] rounded-[15px] bg-[#eff0f2]"></input>
 <%--                        <p class="absolute left-[125px] top-[325px] text-xl text-left text-[#838383]">Doe</p>--%>
                     </div>
                 </div>
                 <div class="w-[600px] h-[98px]">
                     <p class="absolute left-[100px] top-[397px] text-xl font-medium text-left text-[#4d5959]"> Email </p>
                     <div class="w-[600px] h-[65px]">
-                        <input type="text" class="w-[600px] h-[65px] absolute left-[97.5px] top-[429.5px] rounded-[15px] bg-[#eff0f2]"></input>
+                        <input type="text" name="email" class="w-[600px] h-[65px] absolute left-[97.5px] top-[429.5px] rounded-[15px] bg-[#eff0f2]"></input>
 <%--                        <p class="absolute left-[127px] top-[448px] text-xl text-left text-[#838383]"> Enter your Email here </p>--%>
                     </div>
                 </div>
                 <div class="w-[600px] h-[99px]">
                     <p class="absolute left-[102px] top-[519px] text-xl font-medium text-left text-[#4d5959]"> Password </p>
                     <div class="w-[600px] h-[65px]">
-                        <input type="password" class="w-[600px] h-[65px] absolute left-[99.5px] top-[552.5px] rounded-[15px] bg-[#eff0f2]"></input>
+                        <input type="password" name="password" class="w-[600px] h-[65px] absolute left-[99.5px] top-[552.5px] rounded-[15px] bg-[#eff0f2]"></input>
 <%--                        <p class="absolute left-[129px] top-[570px] text-xl text-left text-[#838383]"> Enter your Password </p>--%>
                     </div>
                 </div>
