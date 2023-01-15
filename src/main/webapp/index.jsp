@@ -209,7 +209,7 @@
                 <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-withe">
                     <span class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-White">Account Summary</span>
                 </p>
-                <a href="unprocessed/transactions.html"><div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2.5 p-[15px] rounded-[100px] bg-[#26334d] border-2 border-[#26334d]">
+                <a href="transactions.jsp"><div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2.5 p-[15px] rounded-[100px] bg-[#26334d] border-2 border-[#26334d]">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-grow-0 flex-shrink-0 w-[30px] h-[30px] relative" preserveAspectRatio="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15.5925H19.17L14.29 20.4725C13.9 20.8625 13.9 21.5025 14.29 21.8925C14.68 22.2825 15.31 22.2825 15.7 21.8925L22.29 15.3025C22.68 14.9125 22.68 14.2825 22.29 13.8925L15.71 7.29249C15.5232 7.10523 15.2695 7 15.005 7C14.7405 7 14.4868 7.10523 14.3 7.29249C13.91 7.68249 13.91 8.31249 14.3 8.70249L19.17 13.5925H8C7.45 13.5925 7 14.0425 7 14.5925C7 15.1425 7.45 15.5925 8 15.5925Z" fill="white"></path>
                     </svg>
