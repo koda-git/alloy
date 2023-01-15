@@ -74,7 +74,7 @@ public class Transactions extends DatabaseObject {
 
     public String getTimestamp() {
         Date date = new Date(transactionTime);
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        DateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         return format.format(date);
     }
