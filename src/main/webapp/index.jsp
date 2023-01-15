@@ -126,7 +126,7 @@
     <jsp:param name="name" value="<%=u.getFirstName()%>" />
 </jsp:include>
     <body>
-    <div style="font-size:80px; font-weight:bold; text-align:auto; margin-left:185; margin-top:70px;"> Welcome, <%=u.getFirstName()%>! </div>
+    <div style="font-size:80px; font-weight:bold; text-align:e; margin-left:185; margin-top:70px;"> Welcome, <%=u.getFirstName()%>! </div>
     <div class="w-[100vw] h-[100vh] relative overflow-hidden bg-white">
         <div class="flex flex-col justify-start items-center absolute left-[175px] top-[480px] gap-[43px] p-[30px] rounded-[30px] bg-[#D8E5C4]" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">
             <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[1565px] relative">
