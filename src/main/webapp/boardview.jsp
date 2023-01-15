@@ -35,7 +35,7 @@
         sql.setUseAutoClose(true);
         ResultSet rs = null;
         try {
-            rs = sql.executeQuery("SELECT * FROM " + new Post().getTableName() + " WHERE boardUUID = ?", boardUUID);
+            rs = sql.executeQuery("SELECT * FROM " + new Post().getTableName() + " WHERE boardUUID = ? ORDER BY postTime DESC;", boardUUID);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@
             Post p = new Post();
             p.mapFromResultSet(rs);
         %>
-        <a href="postview.jsp?id=<%=p.getId()%>"><h4>Title</h4></a>
+        <a href="postview.jsp?id=<%=p.getId()%>"><h4><%=p.getTitle()%></h4></a>
         <h5>[<%=p.getRating()%>] <%=p.getYear()%> - <%=p.getMonth()%> - <%=p.getDay()%> <%=p.getHour()%>:<%=p.getMinute()%>:<%=p.getSecond()%> by <%=p.getAuthorName()%></h5>
         <h6><%=Math.round(((float) p.getLikes() / (p.getLikes() + p.getDislikes()))*100)%>% people felt helpful.</h6>
         <hr>
