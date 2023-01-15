@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Preview</title>
+    <title>Main</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .container {
@@ -38,10 +38,12 @@
             display: flex;
             flex-direction: column;
             flex: 1;
+            justify-content: center;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
     </style>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
@@ -82,10 +84,13 @@
 <%
 
     User u = (User) session.getAttribute("user");
-    if (u == null) response.sendRedirect("login.jsp");
+    if (u == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
 
     // Get bank accounts
-    BankAccount[] accounts;
+    BankAccount[] accounts = null;
     try {
         accounts = u.getBankAccounts();
     } catch (Exception e) {
@@ -105,6 +110,7 @@
     // Get total spending
     double[] spendingLastMonth = new double[31];
     double[] spendingThisMonth = new double[31];
+    double totalSpending = 0;
 
     for (Transactions transaction : transactionsLastMonth) {
         spendingLastMonth[transaction.getDay() - 1] += transaction.getAmount() * -1;
@@ -112,6 +118,7 @@
 
     for (Transactions transaction : transactionsThisMonth) {
         spendingThisMonth[transaction.getDay() - 1] += transaction.getAmount() * -1;
+        totalSpending += transaction.getAmount() * -1;
     }
 
 %>
@@ -122,29 +129,28 @@
     <div style="font-size:80px; font-weight:bold; text-align:auto; margin-left:185; margin-top:70px;"> Welcome, <%=u.getFirstName()%>! </div>
     <div class="w-[100vw] h-[100vh] relative overflow-hidden bg-white">
         <div class="flex flex-col justify-start items-center absolute left-[175px] top-[480px] gap-[43px] p-[30px] rounded-[30px] bg-[#D8E5C4]" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">
-            <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[2010px] relative">
+            <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[1565px] relative">
                 <p class="flex-grow-0 flex-shrink-0 w-[1093px] h-[30px] text-4xl font-bold text-left text-black"> New to Canada? </p>
             </div>
-            <svg width="996" height="193" viewBox="0 0 996 193" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-grow-0 flex-shrink-0 w-[992px] h-[193px] relative" preserveAspectRatio="none">
-                <a href=""><circle cx="96" cy="95.5" r="92.5" fill="#FFFFFF"></circle></a>
-                <a href=""><circle cx="903" cy="95.5" r="92.5" fill="#FFFFFF"></circle></a>
-                <a href=""><circle cx="634" cy="95.5" r="92.5" fill="#FFFFFF"></circle></a>
-                <a href=""><circle cx="365" cy="95.5" r="92.5" fill="#FFFFFF"></circle></a>
-            </svg>
+            <a href="categoryview.jsp?category=B0B4C866-1212-42B6-9DFA-4381C8EE1B02&title=Bank">Bank</a>
+            <a href="categoryview.jsp?category=28DA7D3C-9FF4-41A8-9785-0D96F5D98C6A&title=Transportation">Transportation</a>
+            <a href="categoryview.jsp?category=4BEBCB22-BACE-4CE8-A174-C50160B4F20F&title=School">School</a>
+            <a href="categoryview.jsp?category=7D470298-959B-45DF-9A65-DAB317050F32&title=Housing">Housing</a>
+            <a href="categoryview.jsp?category=AF87B972-4096-42CF-BADD-4575A5AFB577&title=Forums">Forums</a>
         </div>
-        <div class="flex flex-col justify-start items-center absolute left-[175px] top-[840px] gap-[43px] p-[30px] rounded-[30px] bg-[#FDF4EA]" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">
-            <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[2010px] h-[0] relative">
-              <form action="" method="">
-                <div>
-                    <input type="text" placeholder="     If you have a question Put your Question Here and press enter to submit" maxlength="200" style="width:2000; height:210px; margin-top:250px;">
-                </div>
-                <input type="submit" value="Submit" hidden>
-              </form>
-            </div>
-            <svg width="996" height="193" viewBox="0 0 996 193" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-grow-0 flex-shrink-0 w-[992px] h-[193px] relative" preserveAspectRatio="none">
-            </svg>
-        </div>
-        <div class="flex flex-col justify-start items-start w-[1440px] h-[421px] absolute left-[800px] top-[25px] gap-[30px] px-10 pt-10 pb-[98px] rounded-[30px] bg-neutral-50" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">
+<%--        <div class="flex flex-col justify-start items-center absolute left-[175px] top-[840px] gap-[43px] p-[30px] rounded-[30px] bg-[#FDF4EA]" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">--%>
+<%--            <div class="flex justify-between items-center flex-grow-0 flex-shrink-0 w-[2010px] h-[0] relative">--%>
+<%--              <form action="" method="">--%>
+<%--                <div>--%>
+<%--                    <input type="text" placeholder="     If you have a question Put your Question Here and press enter to submit" maxlength="200" style="width:2000; height:210px; margin-top:250px;">--%>
+<%--                </div>--%>
+<%--                <input type="submit" value="Submit" hidden>--%>
+<%--              </form>--%>
+<%--            </div>--%>
+<%--            <svg width="996" height="193" viewBox="0 0 996 193" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-grow-0 flex-shrink-0 w-[992px] h-[193px] relative" preserveAspectRatio="none">--%>
+<%--            </svg>--%>
+<%--        </div>--%>
+        <div class="flex flex-col justify-start items-start w-[1000px] h-[421px] absolute left-[800px] top-[25px] gap-[30px] px-10 pt-10 pb-[98px] rounded-[30px] bg-neutral-50" style="box-shadow: 0px 2px 5px 0 rgba(38,51,77,1);">
             <div class="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 relative">
                 <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-[#4d5e80]"> Transactions </p>
                 <div class="flex justify-start items-center flex-grow-0 flex-shrink-0" style="filter: drop-shadow(0px 2px 5px rgba(38,51,77,0.03));">
@@ -195,7 +201,7 @@
                 </div>
             </div>
           <div style="polstion:absolute; width:1000px; height:500px; margin-top:-392px; margin-left:380;">
-            <div id="curve_chart" style=" width: 1000px; height: 400px;"></div>
+            <div id="curve_chart" style=" width: 550px; height: 400px;"></div>
           </div>
         </div>
         <div class="flex flex-col justify-start items-start w-[590px] h-[424px] absolute left-[175px] top-[25px] gap-5 p-10 rounded-[30px] bg-[#1A2233]" style="box-shadow: px 5px 10px 0px rgba(255,255,255,1);">
@@ -203,28 +209,28 @@
                 <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-withe">
                     <span class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-White">Account Summary</span>
                 </p>
-                <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2.5 p-[15px] rounded-[100px] bg-[#26334d] border-2 border-[#26334d]">
+                <a href="unprocessed/transactions.html"><div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2.5 p-[15px] rounded-[100px] bg-[#26334d] border-2 border-[#26334d]">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-grow-0 flex-shrink-0 w-[30px] h-[30px] relative" preserveAspectRatio="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15.5925H19.17L14.29 20.4725C13.9 20.8625 13.9 21.5025 14.29 21.8925C14.68 22.2825 15.31 22.2825 15.7 21.8925L22.29 15.3025C22.68 14.9125 22.68 14.2825 22.29 13.8925L15.71 7.29249C15.5232 7.10523 15.2695 7 15.005 7C14.7405 7 14.4868 7.10523 14.3 7.29249C13.91 7.68249 13.91 8.31249 14.3 8.70249L19.17 13.5925H8C7.45 13.5925 7 14.0425 7 14.5925C7 15.1425 7.45 15.5925 8 15.5925Z" fill="white"></path>
                     </svg>
-                </div>
+                </div></a>
             </div>
             <div class="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 h-[269px] w-[424px] gap-4 pb-[26px]">
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[312px] h-[68px] relative gap-9">
                     <img src="imgs/icons/rbc.png" class="flex-grow-0 flex-shrink-0 w-[60px] h-[60px] rounded-[30px] object-cover" />
-                    <p class="flex-grow-0 flex-shrink-0 text-4xl font-medium text-left text-white"> $ 2,752.30 </p>
+                    <p class="flex-grow-0 flex-shrink-0 text-4xl font-medium text-left text-white"> $ <%=accounts[0].getBalance()%> </p>
                 </div>
                 <div class="flex justify-start items-start flex-grow-0 flex-shrink-0 w-[312px] h-[79px] relative gap-9">
                     <img src="imgs/icons/rbc.png" class="flex-grow-0 flex-shrink-0 w-[60px] h-[60px] rounded-[30px] object-cover" />
-                    <p class="flex-grow-0 flex-shrink-0 text-4xl font-medium text-left text-white"> $ -2,552.30 </p>
+                    <p class="flex-grow-0 flex-shrink-0 text-4xl font-medium text-left text-white"> $ <%=accounts[1].getBalance()%> </p>
                 </div>
                 <div class="flex justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-[60px]">
                     <div class="flex flex-col justify-start items-start flex-grow relative">
-                        <p class="flex-grow-0 flex-shrink-0 text-3xl font-medium text-left text-white"> $ 6,443 </p>
+                        <p class="flex-grow-0 flex-shrink-0 text-3xl font-medium text-left text-white"> $ <%=totalSpending%> </p>
                         <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#6b7a99]"> Spent this month </p>
                     </div>
                     <div class="flex flex-col justify-start items-start flex-grow relative">
-                        <p class="flex-grow-0 flex-shrink-0 text-3xl font-medium text-left text-white"> $ 200 </p>
+                        <p class="flex-grow-0 flex-shrink-0 text-3xl font-medium text-left text-white"> $ <%=Math.abs(accounts[0].getBalance() + accounts[1].getBalance())%> </p>
                         <p class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-[#6b7a99]"> Total Balance </p>
                     </div>
                 </div>
