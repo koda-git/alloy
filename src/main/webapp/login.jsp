@@ -85,7 +85,9 @@
                         <span class="text-lg text-left text-black">Having trouble logging in? </span>
                         <span class="text-lg font-medium text-left text-[#4c89f8]/60">Help</span>
                     </p>
-                    <button type="submit" class="flex justify-center items-center w-[300px] h-[60px] absolute left-[241px] top-[663px] gap-2.5 rounded-[15px] bg-[#4c89f8]/60"/></button>
+                    <button type="submit" class="flex justify-center items-center w-[300px] h-[60px] absolute left-[241px] top-[663px] gap-2.5 rounded-[15px] bg-[#4c89f8]/60"/>
+                        <p class="flex-grow-0 flex-shrink-0 text-[26px] font-medium text-left text-white"> Login </p>
+                    </button>
                 </div>
             </form>
         </div>
