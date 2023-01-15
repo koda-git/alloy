@@ -1,19 +1,11 @@
 package org.mcmasterkboys.codenamehenryford.objects;
 
 import com.google.gson.JsonObject;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.Setter;
 import org.mcmasterkboys.codenamehenryford.objects.exception.DataFieldMismatchException;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DataObject {
-
-    @Setter private HashMap<String, Object> unmappedObject = new HashMap<>();
 
     public JsonObject toJson() {
         Class<?> reflectedClass = this.getClass();
@@ -75,17 +67,10 @@ public class DataObject {
                 else if (typeName.contains("long")) field.set(this, o.get(name).getAsLong());
                 else if (typeName.contains("bool")) field.set(this, o.get(name).getAsBoolean());
                 else if (type.getSuperclass().getName().equals(DataObject.class.getName())) {
-                    Class<?> map;
-                    try {
-                        map = maps[mapTicks];
-                        mapTicks++;
-                        if (map == null) throw new DataFieldMismatchException(DataFieldMismatchException.FIELD_TYPE_MISMATCH, name, null);
-                    }catch (Exception e) {
-                        throw new DataFieldMismatchException(DataFieldMismatchException.FIELD_TYPE_MISMATCH, name, null);
-                    }
-
-                    Object obj = map.newInstance();
-                    ((DataObject) obj).fromJson(o.getAsJsonObject(name), maps);
+                    JsonObject object = o.get(name).getAsJsonObject();
+                    DataObject dataObject = (DataObject) type.getDeclaredConstructor().newInstance();
+                    dataObject.fromJson(object, maps);
+                    field.set(this, dataObject);
                 }
                 else if (typeName.contains("string")) field.set(this, o.get(name).getAsString());
                 else System.out.println("Unknown type: " + typeName + " with type " + type.isAssignableFrom(DataObject.class));
