@@ -2,8 +2,9 @@ package org.mcmasterkboys.codenamehenryford.objects;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.hy.libhyextended.objects.DatabaseObject;
+import org.mcmasterkboys.codenamehenryford.modules.SQLConnectionFactory;
 
-import java.sql.SQLException;
 
 @Getter
 @Setter
@@ -15,52 +16,27 @@ public class User extends DatabaseObject {
     private String password;
     private String uuid;
     private String phoneNumber;
+    private String gender;
     private Address address;
 
+    private String tableName = "users";
+    private String pkName = "uuid";
+    private String pkType = "String";
 
     public User() {
-        super();
-        this.setPkName("uuid");
-        this.setPkType("String");
+        super(SQLConnectionFactory.class);
     }
 
-    public User(String uuid) {
-        super();
-        this.setPkName("uuid");
-        this.setPkType("String");
-        this.setPkValue(uuid);
-    }
-
-    public User(String lastName, String firstName, String email, String password, String uuid, String phoneNumber, Address address) {
-        super();
-        this.setPkName("uuid");
-        this.setPkType("String");
+    public User(String uuid, String lastName, String firstName, String email, String password, String phoneNumber, Gender gender, Address address) {
+        super(SQLConnectionFactory.class);
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
         this.password = password;
         this.uuid = uuid;
         this.phoneNumber = phoneNumber;
+        this.gender = gender.toString();
         this.address = address;
     }
 
-    @Override
-    public void insert() throws SQLException {
-
-    }
-
-    @Override
-    public void delete() throws SQLException {
-
-    }
-
-    @Override
-    public void update() throws SQLException {
-
-    }
-
-    @Override
-    public void select() throws SQLException {
-
-    }
 }

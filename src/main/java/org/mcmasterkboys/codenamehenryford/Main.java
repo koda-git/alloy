@@ -1,26 +1,22 @@
 package org.mcmasterkboys.codenamehenryford;
 
+import com.google.gson.JsonObject;
 import org.mcmasterkboys.codenamehenryford.objects.Address;
+import org.mcmasterkboys.codenamehenryford.objects.Gender;
 import org.mcmasterkboys.codenamehenryford.objects.User;
-import org.mcmasterkboys.codenamehenryford.objects.exception.DataFieldMismatchException;
 
 public class Main {
-    public static void main(String[] args) throws DataFieldMismatchException {
+    public static void main(String[] args) throws Exception {
 
         Address a = new Address("1234", "Toronto", "ON", "Canada", "M4T 1J8");
         //public User(String lastName, String firstName, String email, String password, String uuid, String phoneNumber, Address address) {
-        User u = new User("Appleseed", "John", "johnappleseed@apple.com", "password", "1234", "1234567890", a);
+        User u = new User("asdf", "Appleseed", "John", "johnappleseed@apple.com", "password", "1234567890", Gender.MALE, a);
 
-        System.out.println(u.toJson());
-
-        System.out.println("!!!!!!!!Conversion done!!!!!!!!!!!");
-
+//        u.insert();
+        JsonObject j = u.toJson();
         User o = new User();
-        o.fromJson(u.toJson(), Address.class);
+        o.fromJson(j);
 
-        System.out.println("!!!!!!!!Parsing done!!!!!!!!!!!");
-
-        System.out.println(o.toJson());
-
+        System.out.println(o);
     }
 }
