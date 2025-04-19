@@ -103,9 +103,9 @@ pom.xml                    # Maven config
 ## 🤝 Team & Credits
 
 Built with ❤️ during DeltaHacks IX by a team of McMaster students.  
-https://github.com/sktncks
-https://github.com/410-dev
-https://github.com/koda-git
+https://github.com/410-dev \
+https://github.com/sktncks \
+https://github.com/koda-git \
 Custom Java modules via [`libhyextended`](https://github.com/410-dev/libhyextended)
 
 ---
