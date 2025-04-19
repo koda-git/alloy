@@ -8,6 +8,20 @@ A full-stack web application prototype built during **DeltaHacks IX** (36-hour h
 
 ---
 
+
+## 📸 Demo Screenshots
+### Login Screen
+![Login Screen](./alloy_demo1.png)
+
+### Verification Code Screen
+![Verification Code Screen](./alloy_demo2.png)
+
+### Transaction Table
+![Transaction Table](./alloy_demo3.png)
+
+### Dashboard Overview
+![Dashboard Overview](./alloy_demo4.png)
+
 ## 🌐 Features
 
 ### ✅ Banking System
