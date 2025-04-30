@@ -10,6 +10,10 @@ A full-stack web application prototype built during **DeltaHacks IX** (36-hour h
 
 
 ## 📸 Demo Screenshots
+
+### Dashboard Overview
+![Dashboard Overview](./alloy_demo4.png)
+
 ### Login Screen
 ![Login Screen](./alloy_demo1.png)
 
@@ -19,8 +23,7 @@ A full-stack web application prototype built during **DeltaHacks IX** (36-hour h
 ### Transaction Table
 ![Transaction Table](./alloy_demo3.png)
 
-### Dashboard Overview
-![Dashboard Overview](./alloy_demo4.png)
+
 
 ## 🌐 Features
 
